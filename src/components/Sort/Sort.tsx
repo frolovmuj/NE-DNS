@@ -3,6 +3,8 @@ import { motion } from 'framer-motion';
 import clsx from 'clsx'
 import { useAppDispatch } from '../../hooks/useAppDispatch'
 
+import styles from './Sort.module.scss'
+
 import { ISort } from '../../models/Sort';
 
 import { setSort } from '../../redux/filter/filter.slice';
@@ -62,10 +64,10 @@ const Sort: FC<iSortProps> = memo(({ sort }) => {
   }, []);
 
   return (
-    <div ref={sortRef} className="sort">
+    <div ref={sortRef} className={styles.sort}>
       <div
         onClick={() => changePopup(popup)}
-        className="sort__label">
+        className={styles.sort__label}>
         <motion.div
           initial={{ scale: 0 }}
           animate={{ rotate: 180, scale: 1 }}
@@ -76,7 +78,7 @@ const Sort: FC<iSortProps> = memo(({ sort }) => {
           }}>
           {' '}
           <svg
-            className={clsx(popup && 'active')}
+            className={clsx(popup && styles.active)}
             width="10"
             height="6"
             viewBox="0 0 10 6"
@@ -92,12 +94,12 @@ const Sort: FC<iSortProps> = memo(({ sort }) => {
         <span>{sort.name}</span>
       </div>
       {popup && (
-        <div className="sort__popup">
+        <div className={styles.sort__popup}>
           <ul>
             {list.map((c, i) => (
               <li
                 key={i}
-                className={clsx(sort.name === c.name && 'active')}
+                className={clsx(sort.name === c.name && styles.active)}
                 onClick={() => chooseSort(c)}>
                 {c.name}
               </li>

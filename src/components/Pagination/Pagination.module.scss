@@ -15,6 +15,10 @@
       border-radius: 50%;
       border: 1px solid $gray;
       position: relative;
+      @media (width <= 516px) {
+        width: 45px;
+        height: 45px;
+      }
       &:hover {
         background: $gray;
         a {
@@ -28,7 +32,9 @@
         width: 100%;
         height: 100%;
         text-align: center;
-        line-height: 60px;
+        @media (width <= 516px) {
+          line-height: 45px;
+        }
       }
     }
     :global {
@@ -42,7 +48,6 @@
         &.disabled {
           :hover {
             background: $gray;
-            
           }
           background: $gray;
           cursor: default;

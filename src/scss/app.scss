@@ -71,10 +71,13 @@ body {
     max-width: 820px;
     margin: 90px auto;
     @media (width <= 822px) {
-      margin: 25px auto;
+      margin: -6px auto;
     }
     .content__title {
       margin: 0;
+      @media (width <= 822px) {
+        margin: 6px;
+      }
     }
   }
 }
@@ -287,6 +290,12 @@ body {
     &-details {
       display: flex;
       justify-content: space-between;
+      @media (width <= 588px) {
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 5px;
+      }
 
       span {
         font-size: 22px;
@@ -304,6 +313,8 @@ body {
       justify-content: space-between;
       margin-top: 40px;
       @media (width <= 588px) {
+        margin-top: 30px;
+
         flex-direction: column;
         justify-content: center;
         align-items: center;
@@ -404,5 +415,3 @@ body {
     }
   }
 }
-
-
