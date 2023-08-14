@@ -75,9 +75,6 @@ body {
     }
     .content__title {
       margin: 0;
-      @media (width <= 822px) {
-        margin: 6px;
-      }
     }
   }
 }
@@ -90,6 +87,9 @@ body {
     @media (width <= 534px) {
       flex-direction: column;
       gap: 20px;
+    }
+    @media (width <= 822px) {
+      margin-bottom: 20px;;
     }
   }
 

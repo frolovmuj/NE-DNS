@@ -24,6 +24,15 @@ const Cart: FC = () => {
     if (window.confirm('Are you sure you want to remove?'))
       dispatch(removeAllBasket());
   };
+  const onConfirmPay = () => {
+    if (items.length === 1) {
+      if (window.confirm('You bought this pizza'))
+        dispatch(removeAllBasket());
+    } else {
+      if (window.confirm('You bought these pizzas'))
+        dispatch(removeAllBasket());
+    }
+  };
 
   return (
     <>
@@ -138,8 +147,11 @@ const Cart: FC = () => {
                 </svg>
                 <span>Вернуться назад</span>
               </Link>
-              <div className="button pay-btn">
+              <div onClick={onConfirmPay} className="button pay-btn">
+
                 <span>Оплатить сейчас</span>
+
+
               </div>
             </div>
           </div>
