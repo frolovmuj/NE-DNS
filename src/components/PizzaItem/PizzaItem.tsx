@@ -28,7 +28,7 @@ const PizzaItem: FC<PizzaItemProps> = ({ card }) => {
   const [totalPrice, setTotalPrice] = useState<number>(price)
 
 
-  const clickOnPlus = () => { 
+  const clickOnPlus = () => {
     dispatch(
       addToBasket({
         id,
@@ -72,7 +72,7 @@ const PizzaItem: FC<PizzaItemProps> = ({ card }) => {
       <div className={styles.pizzaBlock}>
         <Link to={`/pizzas/${id}`}>
           <motion.img
-            animate={{ rotate: [0, 50] }}
+            animate={{ rotate: [0, 35] }}
             transition={{
               type: 'spring',
               stiffness: 60,

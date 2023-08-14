@@ -52,7 +52,7 @@ const CardPage: FC = () => {
       setTotalPrice((): number => calcTotalPriceCard(sizePizza, pizza.price, typeNames[typePizza]))
     }
 
-  }, [sizePizza, typePizza, totalPrice])
+  }, [sizePizza, typePizza, pizza])
 
 
   const clickOnPlus = () => {
