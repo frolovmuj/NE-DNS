@@ -1,12 +1,12 @@
-import { useState, useEffect, FC } from 'react';
+import { FC, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 
-import { motion, AnimatePresence } from 'framer-motion';
+import { AnimatePresence, motion } from 'framer-motion';
 import { CiHeart } from 'react-icons/ci';
 import { FaHeart } from 'react-icons/fa';
 
-import styles from './Pizza.module.scss';
 import { calcTotalPriceCard } from '../../utils/calcTotalPriceCard';
+import styles from './Pizza.module.scss';
 
 import { useAppDispatch } from '../../hooks/useAppDispatch';
 import {
@@ -14,13 +14,13 @@ import {
   addToPusheditem,
 } from '../../redux/cart/cart.slice';
 
+import toast from 'react-hot-toast';
 import { IPizza } from '../../models/Pizza';
 import {
   addToFavorites,
   removeFromFavorites,
 } from '../../redux/favorites/favorite.slice';
 import { findIsFavoriteCard } from '../../utils/findIsFavoriteCard';
-import toast from 'react-hot-toast';
 import { findItemFromCart } from '../../utils/findItemFromCart';
 import { findPushedItem } from '../../utils/findPushedItem';
 
@@ -44,6 +44,7 @@ const PizzaItem: FC<PizzaItemProps> = ({ card }) => {
     maxLimits,
   } = card;
 
+  // @ts-ignore
   const [typePizza, setTypePizza] = useState<number>(
     types[0]
   );
@@ -135,10 +136,6 @@ const PizzaItem: FC<PizzaItemProps> = ({ card }) => {
   };
   const plusCount = () => {
     count < maxLimits && setCount((prev) => prev + 1);
-  };
-
-  const changePizzaType = (type: number) => {
-    setTypePizza(type);
   };
 
   useEffect(() => {

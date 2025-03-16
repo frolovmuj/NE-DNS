@@ -5,8 +5,6 @@ import axios from 'axios';
 import styles from './CardPage.module.scss';
 
 import blockstyles from '../../components/PizzaItem/Pizza.module.scss';
-import { MdOutlineStarBorder } from 'react-icons/md';
-import { MdOutlineStar } from 'react-icons/md';
 
 import { useAppDispatch } from '../../hooks/useAppDispatch';
 import { addToBasket } from '../../redux/cart/cart.slice';

@@ -1,8 +1,6 @@
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 
-import emptyCardImg from '../../assets/img/empty-cart.png';
-
 const EmptyCart = () => {
   return (
     <div className="container container--cart">
