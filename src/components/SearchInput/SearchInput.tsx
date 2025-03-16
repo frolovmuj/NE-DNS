@@ -3,7 +3,7 @@ import {
   useState,
   useCallback,
   ChangeEvent,
-  FC
+  FC,
 } from 'react';
 import debounce from 'lodash.debounce';
 import { HiOutlineSearch } from 'react-icons/hi';
@@ -11,7 +11,7 @@ import { RxCross2 } from 'react-icons/rx';
 
 import styles from './SearchInput.module.scss';
 
-import {useAppDispatch} from '../../hooks/useAppDispatch'
+import { useAppDispatch } from '../../hooks/useAppDispatch';
 import { setSearchText } from '../../redux/filter/filter.slice';
 
 const SearchInput: FC = () => {
@@ -26,7 +26,10 @@ const SearchInput: FC = () => {
   };
 
   const SetDebounceValue = useCallback(
-    debounce((value: string) => dispatch(setSearchText(value)), 800),
+    debounce(
+      (value: string) => dispatch(setSearchText(value)),
+      800
+    ),
     [setSearchText]
   );
 
@@ -44,7 +47,7 @@ const SearchInput: FC = () => {
       <input
         ref={inputRef}
         className={styles.input}
-        placeholder="Поиск пиццы..."
+        placeholder="Поиск телефонов..."
         type="text"
         value={value}
         onChange={(e) => onChange(e)}

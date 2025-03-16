@@ -10,20 +10,16 @@
       justify-content: center;
       align-items: center;
       width: 60px;
-      height: 60px;
+      height: 30px;
       cursor: pointer;
-      border-radius: 50%;
-      border: 1px solid $gray;
+      border-radius: 10%;
       position: relative;
       @media (width <= 516px) {
         width: 45px;
         height: 45px;
       }
       &:hover {
-        background: $gray;
-        a {
-          color: $gray-line;
-        }
+        opacity: 0.8;
       }
       a {
         position: absolute;
@@ -31,7 +27,7 @@
         left: 0;
         width: 100%;
         height: 100%;
-        line-height: 60px;
+        line-height: 30px;
 
         text-align: center;
         @media (width <= 516px) {
@@ -43,9 +39,10 @@
       .previous,
       .next {
         :hover {
-          border-radius: 50%;
-          background: $orange;
+          border-radius: 10%;
+          background: $black;
           border: none;
+          color: #fff;
         }
         &.disabled {
           :hover {
@@ -59,11 +56,11 @@
         }
       }
       .selected {
-        background: $orange;
+        background: $black;
         border: none;
         cursor: default;
         &:hover {
-          background: $orange;
+          background: $black;
         }
         a {
           color: #fff;

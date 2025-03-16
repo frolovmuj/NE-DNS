@@ -4,9 +4,12 @@
   width: 280px;
   text-align: center;
   margin-bottom: 65px;
+  position: relative;
+  border-radius: 10px;
 
   &__image {
     width: 260px;
+    height: 270px;
   }
 
   &__title {
@@ -16,6 +19,14 @@
     margin-bottom: 20px;
     position: relative;
     z-index: 2;
+  }
+
+  &__heart {
+    position: absolute;
+    top: -15px;
+    right: 0px;
+    z-index: 3;
+    cursor: pointer;
   }
 
   &__selector {
@@ -28,10 +39,6 @@
     ul {
       display: flex;
       flex: 1;
-
-      &:first-of-type {
-        margin-bottom: 6px;
-      }
 
       li {
         text-align: center;
@@ -48,6 +55,13 @@
         }
       }
     }
+  }
+
+  &__rating {
+    margin: 20px 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
 
   &__counter {

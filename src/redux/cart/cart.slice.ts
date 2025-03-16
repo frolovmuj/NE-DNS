@@ -1,4 +1,7 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import {
+  createSlice,
+  PayloadAction,
+} from '@reduxjs/toolkit';
 import { calcTotalPrice } from '../../utils/calcTotalPrice';
 
 import { ICartPizza } from '../../models/CartPizza';
@@ -7,29 +10,57 @@ import { ICartSliceState } from './types';
 const initialState: ICartSliceState = {
   items: [],
   totalPrice: 0,
-}
+  pushedItem: [],
+};
 
 export const cartSlice = createSlice({
   name: 'cart',
   initialState,
   reducers: {
-    addToBasket(state, { payload: item }: PayloadAction<ICartPizza>) {
+    addToBasket(
+      state,
+      { payload: item }: PayloadAction<ICartPizza>
+    ) {
       const findedItem = state.items.find(
         (o) =>
           o.id === item.id &&
           o.type === item.type &&
           o.size === item.size
       );
+      const findedPushedItem = state.pushedItem?.find(
+        (o) => o.id === item.id && o.size === item.size
+      );
+
       if (findedItem) {
-        findedItem.count += item.count;
+        findedItem.count = Math.min(
+          findedItem.count + item.count,
+          item.maxLimits
+        );
       } else {
         state.items.push({
           ...item,
+          count: Math.min(item.count, item.maxLimits),
         });
       }
+
+      if (findedPushedItem) {
+        findedPushedItem.count = Math.min(
+          (findedPushedItem.count as number) + item.count,
+          item.maxLimits
+        );
+      } else if (state.pushedItem) {
+        state.pushedItem.push({
+          ...item,
+          count: Math.min(item.count, item.maxLimits),
+        });
+      }
+
       state.totalPrice = calcTotalPrice(state.items);
     },
-    removeFromBasket(state, { payload: item }: PayloadAction<ICartPizza>) {
+    removeFromBasket(
+      state,
+      { payload: item }: PayloadAction<ICartPizza>
+    ) {
       state.items = state.items.filter(
         ({ id, size, type }) => {
           return (
@@ -45,7 +76,10 @@ export const cartSlice = createSlice({
       state.items = [];
       state.totalPrice = 0;
     },
-    minusItem(state, { payload: item }: PayloadAction<ICartPizza>) {
+    minusItem(
+      state,
+      { payload: item }: PayloadAction<ICartPizza>
+    ) {
       const index = state.items.findIndex(
         ({ id, size, type }) =>
           id === item.id &&
@@ -61,7 +95,10 @@ export const cartSlice = createSlice({
 
       state.totalPrice = calcTotalPrice(state.items);
     },
-    plusItem(state, { payload: item }: PayloadAction<ICartPizza>) {
+    plusItem(
+      state,
+      { payload: item }: PayloadAction<ICartPizza>
+    ) {
       const findedItem = state.items.find(
         ({ id, size, type }) =>
           id === item.id &&
@@ -73,6 +110,35 @@ export const cartSlice = createSlice({
       }
       state.totalPrice = calcTotalPrice(state.items);
     },
+    addToPusheditem(
+      state,
+      {
+        payload: item,
+      }: PayloadAction<
+        Record<
+          'id' | 'size' | 'count' | 'maxLimits',
+          string | number
+        >
+      >
+    ) {
+      const findedPushedItem = state.pushedItem?.find(
+        (o) => o.id === item.id && o.size === item.size
+      );
+      if (findedPushedItem) {
+        findedPushedItem.count = Math.min(
+          (findedPushedItem.count as number) +
+            (item.count as number),
+          item.maxLimits as number
+        );
+      } else if (state.pushedItem) {
+        state.pushedItem.push({
+          id: item.id as string,
+          size: item.size as number,
+          count: 0,
+          maxLimits: item.maxLimits as number,
+        });
+      }
+    },
   },
 });
 
@@ -82,8 +148,7 @@ export const {
   removeAllBasket,
   minusItem,
   plusItem,
+  addToPusheditem,
 } = cartSlice.actions;
-
-
 
 export default cartSlice.reducer;

@@ -4,7 +4,7 @@
 @import 'components/all';
 
 body {
-  background-color: $background;
+  background-color: #fff;
   font-family: Nunito;
   @media (width < 475px) {
     background: #fff;
@@ -12,23 +12,51 @@ body {
 }
 
 .wrapper {
-  width: calc(100vw - 100px);
-  height: 100%;
   background-color: #fff;
-  margin: 50px auto;
+  width: 100%;
   border-radius: 10px;
-  max-width: 1400px;
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
   overflow: hidden;
-  @media (width < 475px) {
+}
+
+.slider-container {
+  margin-bottom: 80px;
+  &__image {
+    cursor: pointer;
     width: 100%;
-    margin: 0 auto;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    border-radius: 76px;
+  }
+}
+
+.indicator {
+  cursor: pointer;
+  padding: 10px;
+  text-align: center;
+  margin: 0;
+
+  svg {
+    width: 30px;
+    height: 30px;
   }
 }
 
 .content {
-  padding: 40px 0;
-  min-height: 50dvh;
+  padding-top: 181px;
+  padding-bottom: 30px;
+  min-height: 100%;
   display: flex;
+  flex: 1 1 auto;
+
+  @media (width <= 640px) {
+    padding-top: 40px;
+  }
+
   &__error-info {
     h1 {
       max-width: 550px;
@@ -48,6 +76,8 @@ body {
     margin: 35px 0;
     position: relative;
     z-index: 10;
+    display: flex;
+    gap: 10px;
   }
 
   &__items {
@@ -68,8 +98,8 @@ body {
   width: $container-width;
   margin: 0 auto;
   &--cart {
-    max-width: 820px;
     margin: 90px auto;
+    max-width: 1950px;
     @media (width <= 822px) {
       margin: -6px auto;
     }
@@ -89,26 +119,19 @@ body {
       gap: 20px;
     }
     @media (width <= 822px) {
-      margin-bottom: 20px;;
+      margin-bottom: 20px;
     }
+  }
+
+  &__button-wrapper {
+    display: flex;
+    gap: 8px;
   }
 
   .content__title {
     display: flex;
     align-items: center;
     font-size: 32px;
-
-    svg {
-      position: relative;
-      top: -2px;
-      width: 30px;
-      height: 30px;
-      margin-right: 10px;
-      path {
-        stroke: $black;
-        stroke-width: 1.9;
-      }
-    }
   }
 
   &__clear {
@@ -145,6 +168,8 @@ body {
   &__item {
     display: flex;
     width: 100%;
+    justify-content: center;
+    align-items: center;
     border-top: 1px solid $gray-line;
     padding-top: 30px;
     position: relative;
@@ -199,6 +224,7 @@ body {
       display: flex;
       align-items: center;
       justify-content: space-between;
+      gap: 22px;
       width: 13%;
       @media (width <= 822px) {
         margin: 0 auto 10px;
@@ -302,7 +328,7 @@ body {
 
         &:last-of-type {
           b {
-            color: $orange;
+            color: $black;
           }
         }
       }
@@ -388,11 +414,12 @@ body {
       margin-bottom: 10px;
     }
 
-    p {
+    > p {
       font-size: 18px;
       line-height: 145.4%;
       letter-spacing: 0.01em;
       color: #777777;
+      margin: 32px 0;
     }
 
     icon {
@@ -407,11 +434,14 @@ body {
     }
 
     .button--black {
+      display: flex;
       padding: 12px 0 14px;
       width: 230px;
       margin: 0 auto;
       font-weight: 600;
       font-size: 18px;
+      justify-content: center;
+      align-items: center;
     }
   }
 }

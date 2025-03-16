@@ -1,21 +1,22 @@
-import { FC } from 'react'
+import { FC } from 'react';
 import ReactPaginate from 'react-paginate';
 import styles from './Pagination.module.scss';
 
-import { useAppDispatch } from '../../hooks/useAppDispatch'
+import { useAppDispatch } from '../../hooks/useAppDispatch';
 
 import { setCurrentPage } from '../../redux/filter/filter.slice';
 
-
 interface IEvent {
-  selected: number
+  selected: number;
 }
 
 interface IPaginationProps {
-  currentPage: number
+  currentPage: number;
 }
 
-const Pagination: FC<IPaginationProps> = ({ currentPage }) => {
+const Pagination: FC<IPaginationProps> = ({
+  currentPage,
+}) => {
   const dispatch = useAppDispatch();
 
   const changeCurrentPage = (e: IEvent) => {

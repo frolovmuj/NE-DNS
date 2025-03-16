@@ -8,10 +8,18 @@
   min-width: 100px;
   text-align: center;
   cursor: pointer;
-  transition: background-color $duration ease-in-out, border-color $duration ease-in-out;
+  transition: background-color $duration ease-in-out,
+    border-color $duration ease-in-out;
   border: 1px solid transparent;
   @include noselect();
-
+  &:hover {
+    opacity: 0.9;
+    background: #797979;
+  }
+  &:disabled {
+    opacity: 0.3;
+    cursor: default;
+  }
   &,
   span {
     color: #fff;
@@ -24,10 +32,6 @@
     transition: all $duration ease-in-out;
   }
 
-  &:hover {
-    background-color: darken($orange, 8%);
-  }
-
   &:active {
     background-color: darken($orange, 12%);
     transform: translateY(1px);
@@ -37,38 +41,44 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 32px;
-    height: 32px;
+    width: 90px;
+    height: 47px;
     min-width: 32px;
     padding: 0;
-    border-width: 2px;
+    border-radius: 8px;
+    background: #797979;
+    &:hover {
+      opacity: 0.9;
+      background: #797979;
+    }
+    &:disabled {
+      opacity: 0.3;
+      cursor: default;
+    }
   }
 
   &--black {
     background-color: $black;
-
+    display: flex;
     &:hover,
     &:active {
-      background-color: lighten($color: $black, $amount: 10);
+      background-color: lighten(
+        $color: $black,
+        $amount: 10
+      );
     }
   }
 
   &--outline {
     background-color: #fff;
-    border-color: $orange;
+    border-color: $black;
     &,
     span {
-      color: $orange;
-    }
-
-    svg {
-      path {
-        fill: $orange;
-      }
+      color: $black;
     }
 
     &:hover {
-      background-color: $orange;
+      background-color: $black;
 
       &,
       span {
@@ -83,7 +93,7 @@
     }
 
     &:active {
-      background-color: darken($orange, 8%);
+      background-color: darken($black, 8%);
     }
   }
 
@@ -108,14 +118,14 @@
     &:hover {
       i {
         background-color: #fff;
-        color: $orange;
+        color: $black;
       }
     }
 
     i {
       display: inline-block;
       border-radius: 30px;
-      background-color: $orange;
+      background-color: $black;
       color: #fff;
       font-weight: 600;
       width: 22px;
@@ -131,17 +141,22 @@
 
   &--cart {
     display: flex;
+    width: 430px;
     align-items: center;
     line-height: 23px;
     padding: 12px 25px;
-
+    justify-content: center;
     svg {
-      margin-right: 8px;
-      margin-bottom: 1px;
+      /* margin-right: 8px;
+      margin-bottom: 1px; */
     }
     span {
       font-weight: 600;
       font-size: 16px;
+      display: flex;
+      justify-content: center;
+      align-items: inherit;
+      gap: 5px;
     }
   }
 }

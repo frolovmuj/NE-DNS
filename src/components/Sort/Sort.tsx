@@ -1,14 +1,19 @@
-import { useState, useRef, useEffect, FC, memo } from 'react';
+import {
+  useState,
+  useRef,
+  useEffect,
+  FC,
+  memo,
+} from 'react';
 import { motion } from 'framer-motion';
-import clsx from 'clsx'
-import { useAppDispatch } from '../../hooks/useAppDispatch'
+import clsx from 'clsx';
+import { useAppDispatch } from '../../hooks/useAppDispatch';
 
-import styles from './Sort.module.scss'
+import styles from './Sort.module.scss';
 
 import { ISort } from '../../models/Sort';
 
 import { setSort } from '../../redux/filter/filter.slice';
-
 
 export const list: ISort[] = [
   {
@@ -30,7 +35,7 @@ export const list: ISort[] = [
 ];
 
 interface iSortProps {
-  sort: ISort
+  sort: ISort;
 }
 
 const Sort: FC<iSortProps> = memo(({ sort }) => {
@@ -48,10 +53,12 @@ const Sort: FC<iSortProps> = memo(({ sort }) => {
     setPopup(!value);
   };
 
-
   useEffect(() => {
     const removePopup = (e: MouseEvent) => {
-      if (sortRef.current && !sortRef.current.contains(e.target as Node)) {
+      if (
+        sortRef.current &&
+        !sortRef.current.contains(e.target as Node)
+      ) {
         setPopup(false);
       }
     };
@@ -99,7 +106,9 @@ const Sort: FC<iSortProps> = memo(({ sort }) => {
             {list.map((c, i) => (
               <li
                 key={i}
-                className={clsx(sort.name === c.name && styles.active)}
+                className={clsx(
+                  sort.name === c.name && styles.active
+                )}
                 onClick={() => chooseSort(c)}>
                 {c.name}
               </li>
@@ -109,6 +118,6 @@ const Sort: FC<iSortProps> = memo(({ sort }) => {
       )}
     </div>
   );
-})
+});
 
 export default Sort;

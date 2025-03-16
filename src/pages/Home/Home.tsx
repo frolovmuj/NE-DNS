@@ -1,13 +1,12 @@
-import { useEffect, useRef, FC, } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useEffect, useRef, FC } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
 import qs from 'qs';
 
 import { useAppSelector } from '../../hooks/useAppSelector';
-import { useAppDispatch } from '../../hooks/useAppDispatch'
+import { useAppDispatch } from '../../hooks/useAppDispatch';
 
 import { selectFilter } from '../../redux/filter/filter.selectors';
 import { selectPizzasData } from '../../redux/pizzas/pizzas.selectors';
-
 
 import { setFilters } from '../../redux/filter/filter.slice';
 
@@ -19,27 +18,31 @@ import {
   PizzaItem,
   SkeletonCard,
   Pagination,
-  ErrorInfo
+  ErrorInfo,
+  SearchInput,
 } from '../../components/index';
 
 import { Status } from '../../redux/pizzas/types';
-import { ISearchPizzaParams } from '../../redux/filter/types'
+import { ISearchPizzaParams } from '../../redux/filter/types';
 
 import { list } from '../../components/Sort/Sort';
+import { Slider } from '../../components/Slider/Slider';
 
 const Home: FC = () => {
+  const { pathname } = useLocation();
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
-  const { items: pizzas, status } = useAppSelector(selectPizzasData);
-  const { sort, category, currentPage, searchText } = useAppSelector(selectFilter);
+  const { items: pizzas, status } = useAppSelector(
+    selectPizzasData
+  );
+  const { sort, category, currentPage, searchText } =
+    useAppSelector(selectFilter);
 
   const isSearch = useRef(false);
   const isMounted = useRef(false);
 
-
   const getPizzas = async () => {
-
     const categoryProperty =
       category > 0 ? `category=${category}` : '';
 
@@ -65,7 +68,6 @@ const Home: FC = () => {
   // Парсим параметры при первом рендере
   useEffect(() => {
     if (window.location.search) {
-
       isSearch.current = true;
 
       const params = qs.parse(
@@ -126,20 +128,24 @@ const Home: FC = () => {
     <SkeletonCard key={i} />
   ));
 
-
   return (
     <>
+      <Slider />
       <div className="content__top">
         <Categories category={category} />
+        {!(
+          pathname === '/cart' ||
+          pathname.startsWith('/phones/')
+        ) && <SearchInput />}
         <Sort sort={sort} />
       </div>
-      <h2 className="content__title">Все пиццы</h2>
+      <h2 className="content__title">Все телефоны</h2>
       {status === Status.ERROR && (
-        <ErrorInfo title='Пицца не смогла загрзится, попробуй позже 😕' />
+        <ErrorInfo title="Телефоны не смогли загрузиться, попробуйте позже" />
       )}
 
       {status === Status.SUCCESS && items.length === 0 && (
-        <ErrorInfo title='Таких пицц не найдено 😕' />
+        <ErrorInfo title="Не найдено" />
       )}
 
       {status === Status.SUCCESS && items.length !== 0 && (
@@ -150,7 +156,8 @@ const Home: FC = () => {
         <div className="content__items">{skeletons}</div>
       )}
 
-      {status === Status.SUCCESS || status === Status.LOADING ? (
+      {status === Status.SUCCESS ||
+      status === Status.LOADING ? (
         <Pagination currentPage={currentPage} />
       ) : null}
     </>

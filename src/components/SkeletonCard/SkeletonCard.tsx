@@ -9,7 +9,7 @@ const SkeletonCard: FC = () => (
     viewBox="0 60 280 519"
     backgroundColor="#f3f3f3"
     foregroundColor="#c7c7c7">
-    <circle cx="130" cy="190" r="120" />
+    <rect x="0" y="0" width="280" height="300" />
     <rect
       x="0"
       y="325"

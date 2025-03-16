@@ -1,5 +1,10 @@
-import { ICartPizza } from "../models/CartPizza";
-
-export const calcTotalLength = (items: ICartPizza[]) => {
-  return items.reduce((acc: number, item: ICartPizza) => acc + item.count, 0);
+export const calcTotalLength = <
+  T extends { count: number }
+>(
+  items: T[]
+) => {
+  return items.reduce(
+    (acc: number, item: T) => acc + item.count,
+    0
+  );
 };

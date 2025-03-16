@@ -7,29 +7,26 @@ const EmptyCart = () => {
   return (
     <div className="container container--cart">
       <div className="cart cart--empty">
-        <h2>
-          Корзина пустая <b>😕</b>
-        </h2>
+        <h2>Корзина пуста</h2>
         <p>
-          Вероятней всего, вы не заказывали ещё пиццу.
+          Всего скорей вы не сохраняли телефон
           <br />
-          Для того, чтобы заказать пиццу, перейди на главную
-          страницу.
+          Для того, чтобы положить телефон в корзину,
+          <br />
+          перейдите на главную страницу.
         </p>
-        <motion.img
-          initial={{ scale: 0 }}
-          animate={{ scale: 1 }}
-          transition={{ type: "spring", stiffness: 100 }}
-          src={emptyCardImg} alt="Empty cart" />
         <motion.div
           initial={{ scale: 2 }}
           animate={{ scale: 1 }}
-          transition={{ type: "spring", stiffness: 100 }}>
+          transition={{ type: 'spring', stiffness: 100 }}>
           <Link to="/" className="button button--black">
             <motion.p
-              initial={{ scale: .6 }}
+              initial={{ scale: 0.6 }}
               animate={{ scale: 1.2 }}
-              transition={{ type: "spring", stiffness: 100 }}>
+              transition={{
+                type: 'spring',
+                stiffness: 100,
+              }}>
               Вернуться назад
             </motion.p>
           </Link>
